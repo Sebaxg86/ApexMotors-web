@@ -1,0 +1,319 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Cyberpunk-Regular';
+    src: url('assets/fonts/Cyberpunk-Regular.ttf') format('ttf');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+}
+
+body {
+    background: linear-gradient(135deg, #852467, #30C0B7, #000000);
+    margin: 0;
+    color: white;
+  }
+
+  .text-glow-pink {
+    color: #fff;
+    text-shadow: 0 0 5px #ff0099, 0 0 10px #ff0099, 0 0 15px #ff0099;
+}
+
+.text-glow-blue {
+    color: #fff;
+    text-shadow: 0 0 5px #005eff, 0 0 10px #005eff, 0 0 15px #005eff;
+}
+
+.text-cyber {
+    font-family: 'Orbitron', sans-serif;
+    color: #55d5ff;
+    text-shadow: 0 0 5px #0054ad, 0 0 15px #0054ad, 0 0 30px #0054ad;
+}
+
+.text-cyber-green {
+    font-family: 'Orbitron', sans-serif;
+    color: #55ff69;
+    text-shadow: 0 0 5px #007b02, 0 0 15px #007b02, 0 0 30px #007b02;
+}
+
+.text-cyber2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #e4e739;
+    text-shadow: 0 0 5px #c0bb30, 0 0 15px #c0bb30, 0 0 30px #c0bb30;
+}
+
+.carousel .carousel-item img {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%);
+}
+
+.carousel-caption h5 {
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+  
+  .carousel-caption h5:hover {
+    color: #ff00ff; /* Cambia a un color brillante */
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; /* Agrega un efecto de neón */
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    transition: transform 0.3s, filter 0.3s;
+  }
+  
+  .carousel-control-prev:hover, .carousel-control-next:hover {
+    transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+    filter: brightness(1.5); /* Hace que sean más brillantes */
+  }
+
+  /* Estandarizacion */
+  .card-custom {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, rgba(58, 8, 85, 0.8), rgba(48, 128, 199, 0.7));
+    color: white;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    font-family: Orbitron;
+    color: #fff;
+    text-shadow: 0 0 5px #ff0099, 0 0 10px #ff0099, 0 0 15px #ff0099;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* botones */
+.btn-add {
+    background: linear-gradient(45deg, #3B0855, #852467);
+    color: #fff;
+    font-family: Orbitron !important;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(48, 192, 183, 0.6); /* Sombra brillante */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover para resaltar */
+.btn-add:hover {
+    background: linear-gradient(45deg, #852467, #3B0855);
+    box-shadow: 0 8px 16px #FD8083;
+    transform: scale(1.1); /* Ligero aumento de tamaño */
+}
+
+/* Botones de acción: Editar */
+.btn-edit {
+    background-color: #30C0B7 !important; /* ¡Usa !important para asegurarte de sobrescribir! */
+    color: #000000 !important;
+    border: none !important;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-family: 'Orbitron', sans-serif !important; /* Fuente personalizada */
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-edit:hover {
+    background-color: #298E8A !important; /* Hover más oscuro */
+    box-shadow: 0 4px 8px rgba(48, 192, 183, 0.6);
+  }
+  
+  /* Botones de acción: Eliminar */
+  .btn-delete {
+    background-color: #FD8083 !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-family: 'Orbitron', sans-serif !important; /* Fuente personalizada */
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-delete:hover {
+    background-color: #D85A5F !important; /* Hover más oscuro */
+    box-shadow: 0 4px 8px rgba(253, 128, 131, 0.6);
+  }
+
+/* TABLAS */
+/* Tabla general */
+.table-custom {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #ddd;
+    background-color: transparent;
+    border-collapse: collapse;
+  }
+  
+  /* Encabezado */
+  .table-custom th {
+    background-color: #1e1e2f; /* Fondo oscuro */
+    color: #30C0B7; /* Cian tenue */
+    padding: 12px;
+    text-align: left;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    border-bottom: 2px solid #444; /* Línea separadora */
+  }
+  
+  /* Celdas */
+  .table-custom td {
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo translúcido */
+    border-bottom: 1px solid #444;
+  }
+  
+  /* Hover */
+  .table-custom tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil al pasar el mouse */
+  }
+  
+  /* Fila impar */
+  .table-custom tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.6); /* Alterna colores para filas */
+  }
+  
+  /* Texto */
+  .table-custom td,
+  .table-custom th {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    color: #fff; /* Texto claro */
+  }
+
+  /*  FIltrado */
+  /* Diseño para el select */
+.form-select2 {
+    background: linear-gradient(145deg, #1f1c3d, #2a2555);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .form-select2:hover {
+    background: linear-gradient(145deg, #2a2555, #372e69);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+  }
+  
+  .form-select2:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(48, 203, 135, 0.8);
+    border: 1px solid #30c087;
+  }
+  
+  /* Diseño para el input */
+  .form-control2 {
+    background: linear-gradient(145deg, #1f1c3d, #2a2555);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .form-control2:hover {
+    background: linear-gradient(145deg, #2a2555, #372e69);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+  }
+  
+  .form-control2:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(253, 136, 131, 0.8);
+    border: 1px solid #fd8083;
+  }
+  
+  /* Etiquetas */
+  .form-label2 {
+    color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Modal --------------------------------------*/
+  /* Contenedor principal del modal */
+.mcontent-custom {
+    background: rgba(0, 0, 0, 0.7)!important; /* Fondo transparente */
+    border: 1px solid rgba(255, 255, 255, 0.2)!important; /* Borde sutil */
+    box-shadow: 0 0 15px rgba(48, 192, 183, 0.8)!important; /* Glow cian */
+    border-radius: 12px!important;
+    backdrop-filter: blur(10px)!important; /* Efecto de desenfoque */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Encabezado del modal */
+.modal-header-custom {
+    background: linear-gradient(90deg, #30C0B7, #FD8083); /* Degradado suave */
+    color: #fff;
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+    border-bottom: 2px solid rgba(253, 128, 131, 0.5); /* Glow sutil */
+    box-shadow: 0px 4px 8px rgba(253, 128, 131, 0.3);
+}
+
+/* Título del modal */
+.modal-title-custom {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 8px #30C0B7;
+}
+
+/* Cuerpo del modal */
+.modal-body-custom {
+    color: #fff;
+    font-family: "Orbitron", sans-serif;
+    padding: 20px;
+}
+
+/* Inputs dentro del modal */
+.modal-body-custom .form-control {
+    background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    border: 1px solid rgba(48, 192, 183, 0.5);
+    color: #fff;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-body-custom .form-control:focus {
+    outline: none;
+    border-color: #FD8083;
+    box-shadow: 0 0 10px #FD8083; /* Glow en foco */
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer del modal */
+.modal-footer-custom {
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(48, 192, 183, 0.5);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+/* Para el contenedor principal */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* La página ocupará al menos toda la altura de la ventana */
+}
+
+/* Contenido principal */
+.content-container {
+  flex: 1; /* Hace que el contenido crezca para llenar el espacio disponible */
+}
+
+/* Footer */
+.footer-custom {
+  
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}

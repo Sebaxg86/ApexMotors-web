@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg cyberpunk-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/" style="font-family: 'Cyberpunk-regular', sans-serif;">
+            <i class="bi bi-car-front-fill me-2"></i>
+            APEX-MOTORS
+        </a>
+
+        <!-- Collapsable navbar -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Enlaces -->
+                <li class="nav-item mx-3">
+                    <button class="nav-link btn btn-link" routerLink="/" routerLinkActive="active">
+                        <i class="bi bi-house-fill me-2"></i>
+                        Inicio
+                    </button>
+                </li>
+                <li class="nav-item mx-3">
+                    <button class="nav-link btn btn-link" routerLink="/inventory" routerLinkActive="active">
+                        <i class="bi bi-box-seam-fill me-2"></i>
+                        Inventario
+                    </button>
+                </li>
+                <li class="nav-item mx-3">
+                    <button class="nav-link btn btn-link" routerLink="/sales" routerLinkActive="active">
+                        <i class="bi bi-currency-dollar me-2"></i>
+                        Ventas
+                    </button>
+                </li>
+                <li class="nav-item mx-3">
+                    <button class="nav-link btn btn-link" routerLink="/clients" routerLinkActive="active">
+                        <i class="bi bi-person-rolodex me-2"></i>
+                        Clientes
+                    </button>
+                </li>
+                <li class="nav-item dropdown mx-3">
+                    <button
+                        class="nav-link dropdown-toggle btn btn-link"
+                        id="userDropdown"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-person-workspace"></i> {{ username }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <button class="dropdown-item" (click)="logout()">
+                                <i class="bi bi-person-dash-fill me-2"></i>
+                                Cerrar Sesión
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

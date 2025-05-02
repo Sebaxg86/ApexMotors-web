@@ -1,0 +1,46 @@
+<div class="login-container-custom">
+    <!-- Pantalla de Login -->
+      <div class="card-custom">
+        <div class="card-body-custom">
+          <h2 class="text-center mb-4">Iniciar Sesión</h2>
+          <form class="mt-5" (ngSubmit)="login()">
+            <div class="mb-5">
+              <label for="email" class="form-label-custom mb-3">Correo electrónico:</label>
+              <input 
+                type="email" 
+                class="form-control-custom" 
+                id="email" 
+                placeholder="Ingresa tu correo"
+                autocomplete="off"
+                [(ngModel)]="email"
+                name="email"
+                required>
+            </div>
+            <div class="mb-5">
+              <label for="password" class="form-label-custom mb-3">Contraseña:</label>
+              <input 
+                type="password" 
+                class="form-control-custom" 
+                id="password" 
+                placeholder="Ingresa tu contraseña"
+                autocomplete="off"
+                [(ngModel)]="password"
+                name="password"
+                required>
+            </div>
+            <div>
+              @if(errorMessage) {
+                <div class="alert-custom">
+                  {{ errorMessage }}
+                </div>
+              }
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-custom" [disabled]>
+                {{ isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>    
+  </div>

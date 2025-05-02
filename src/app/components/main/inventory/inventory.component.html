@@ -1,0 +1,279 @@
+<div class="container mt-5">
+  <h1 class="mb-4 text-glow-pink" style="font-family: Orbitron;">
+    <i class="bi bi-box-seam-fill me-2"></i>
+    Inventario de Autos</h1>
+
+  <!-- Filtro -->
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label for="filterCriteria" class="form-label2 text-cyber">Filtrar por: </label>
+      <select
+        id="filterCriteria"
+        class="form-select2 mx-3"
+        [(ngModel)]="filterCriteria"
+      >
+        <option value="brand">Marca</option>
+        <option value="model">Modelo</option>
+        <option value="year">Año</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="filterText" class="form-label2 mx-3 text-cyber">Buscar: </label>
+      <input
+        id="filterText"
+        type="text"
+        class="form-control2"
+        autocomplete="off"
+        [(ngModel)]="filterText"
+        (input)="filterCars()"
+        placeholder="Escribe para filtrar"
+      />
+    </div>
+  </div>
+
+  <!-- Botón para agregar auto -->
+  <div class="text-end mb-3">
+    <button class="btn btn-add" style="font-family: Orbitron;" data-bs-toggle="modal" data-bs-target="#addCarModal">
+      <i class="bi bi-clipboard-plus-fill me-2"></i>
+      Agregar Nuevo Auto
+    </button>
+  </div>
+
+  <!-- Tabla con scroll -->
+  <div
+    class="table-container"
+    style="max-height: 300px; overflow-y: auto; border: 1px solid #333333; padding: 5px;"
+  >
+  <!-- Tabla de autos -->
+  <table class="table-custom table-striped table-custom">
+    <thead>
+      <tr style="position:sticky; top: 0;">
+        <th class="text-cyber">#</th>
+        <th class="text-cyber">Modelo</th>
+        <th class="text-cyber">Marca</th>
+        <th class="text-cyber">Año</th>
+        <th class="text-cyber">Precio</th>
+        <th class="text-cyber">Stock</th>
+        <th class="text-cyber">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(car of filteredCars; track car) {
+        <tr>
+          <td>{{ car.id }}</td>
+          <td>{{ car.model }}</td>
+          <td>{{ car.brand }}</td>
+          <td>{{ car.year }}</td>
+          <td class="text-cyber-green">{{ car.cost | currency: 'MXN':'$' }}</td>
+          <td>{{ car.stock }}</td>
+          <td>
+            
+            <button
+              class="btn btn-edit btn-sm me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#editCarModal"
+              (click)="editCar(car)"
+            >
+              Editar
+            </button>
+            <button class="btn btn-delete btn-sm" (click)="deleteCar(car)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+<!-- Modal para agregar auto -->
+<div class="modal fade" id="addCarModal" tabindex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content mcontent-custom">
+      <form #addCarForm="ngForm" (ngSubmit)="addCar(addCarForm)">
+        <div class="modal-header-custom">
+          <h5 class="modal-title-custom" id="addCarModalLabel">Agregar Nuevo Auto</h5>
+          
+        </div>
+        <div class="modal-body-custom">
+          <div class="mb-3">
+            <label for="brand" class="form-label">Marca</label>
+            <input
+              type="text"
+              id="brand"
+              name="brand"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="newCar.brand"
+              #brand="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="model" class="form-label">Modelo</label>
+            <input
+              type="text"
+              id="model"
+              name="model"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="newCar.model"
+              #model="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="year" class="form-label">Año</label>
+            <input
+              type="number"
+              id="year"
+              name="year"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="newCar.year"
+              #year="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="cost" class="form-label">Costo</label>
+            <input
+              type="number"
+              id="cost"
+              name="cost"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="newCar.cost"
+              #cost="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="newCar.stock"
+              #stock="ngModel"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer-custom">
+          <button type="button" class="btn btn-edit" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-delete" [disabled]="addCarForm.invalid">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para editar auto -->
+<div class="modal fade" id="editCarModal" tabindex="-1" aria-labelledby="editCarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content mcontent-custom">
+      <form #editCarForm="ngForm" (ngSubmit)="updateCar(editCarForm)">
+        <div class="modal-header-custom">
+          <h5 class="modal-title-custom" id="editCarModalLabel">Editar Auto</h5>
+          
+        </div>
+        <div class="modal-body-custom">
+          <div class="mb-3">
+            <label for="editBrand" class="form-label">Marca</label>
+            <input
+              type="text"
+              id="editBrand"
+              name="brand"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="carToEdit.brand"
+              #editBrand="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editModel" class="form-label">Modelo</label>
+            <input
+              type="text"
+              id="editModel"
+              name="model"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="carToEdit.model"
+              #editModel="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editYear" class="form-label">Año</label>
+            <input
+              type="number"
+              id="editYear"
+              name="year"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="carToEdit.year"
+              #editYear="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editCost" class="form-label">Costo</label>
+            <input
+              type="number"
+              id="editCost"
+              name="cost"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="carToEdit.cost"
+              #editCost="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editStock" class="form-label">Stock</label>
+            <input
+              type="number"
+              id="editStock"
+              name="stock"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="carToEdit.stock"
+              #editStock="ngModel"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer-custom">
+          <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-edit" [disabled]="editCarForm.invalid">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Estadísticas de Inventario -->
+ <div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card card-custom text-white text-center">
+        <div class="card-body">
+          <h5 class="card-title">Autos Totales</h5>
+          <p class="card-text display-5 text-glow-blue">{{ totalCars }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card card-custom text-white text-center">
+        <div class="card-body">
+          <h5 class="card-title">Valor total</h5>
+          <p class="card-text display-5 text-cyber-green">{{ totalValue | currency:'MXN':'symbol':'1.0-2' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>

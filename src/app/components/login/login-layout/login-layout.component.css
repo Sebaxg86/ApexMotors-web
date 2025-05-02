@@ -1,0 +1,85 @@
+/* Contenedor principal del login */
+.login-container-custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #852467, #30C0B7, #000000);
+    color: #fff;
+  }
+
+  .form-label-custom{
+    text-align: left;
+    display: block;
+  }
+  
+  /* Card del login */
+  .card-custom {
+    background: rgba(0, 0, 0, 0.5); /* Fondo transparente */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+    box-shadow: 0 0 30px rgba(0, 255, 238, 0.8); /* Glow cian */
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    padding: 100px 20px 100px 20px;
+    max-width: 500px;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Encabezado */
+  .card-body-custom h2 {
+    
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: "Orbitron", sans-serif;
+    text-shadow: 0 0 8px #30C0B7;
+  }
+  
+  /* Inputs */
+  .form-control-custom {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    border: 1px solid rgba(48, 192, 183, 0.5);
+    color: #fff;
+    border-radius: 8px;
+    font-family: "Orbitron", sans-serif;
+    transition: all 0.3s ease-in-out;
+    
+  }
+  
+  .form-control-custom:focus {
+    outline: none;
+    border-color: #FD8083;
+    box-shadow: 0 0 10px #FD8083; /* Glow en foco */
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Alerta de error */
+  .alert-custom {
+    background: rgba(253, 128, 131, 0.2); /* Fondo semi-transparente */
+    color: #FD8083; /* Color rojo brillante */
+    border: 1px solid rgba(253, 128, 131, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+  }
+  
+  /* Botón */
+  .btn-custom {
+    background: linear-gradient(45deg, #3B0855, #852467);
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    font-family: "Orbitron", sans-serif;
+    transition: all 0.3s ease-in-out;
+    padding: 10px;
+  }
+  
+  .btn-custom:hover {
+    background: linear-gradient(45deg, #852467, #3B0855);
+    box-shadow: 0 0 15px rgba(48, 192, 183, 0.8);
+  }

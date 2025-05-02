@@ -1,0 +1,293 @@
+<div class="container mt-5">
+    <!-- Título del componente -->
+    <h1 class="mb-4 text-glow-pink" style="font-family: Orbitron;">
+      <i class="bi bi-person-rolodex me-2"></i>
+      Clientes</h1>
+  
+
+    <!-- Filtro -->
+<div class="row mb-3">
+  <div class="col-md-3">
+    <label for="filterCriteria" class="form-label2 text-cyber">Filtrar por:</label>
+    <select
+      id="filterCriteria"
+      class="form-select2 mx-3"
+      [(ngModel)]="filterCriteria"
+      (change)="filterClients()"
+    >
+      <option value="fullName">Nombre</option>
+      <option value="registrationDate">Año registro</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label for="filterText" class="form-label2 text-cyber">Buscar:</label>
+    <input
+      id="filterText"
+      type="text"
+      class="form-control2 mx-3"
+      autocomplete="off"
+      [(ngModel)]="filterText"
+      (input)="filterClients()"
+      placeholder="Escribe para filtrar"
+    />
+  </div>
+</div>
+  
+  <!-- Botón para agregar auto -->
+  <div class="text-end mb-3">
+    <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addClientModal">
+      <i class="bi bi-person-plus-fill me-2"></i>
+      Agregar Nuevo Cliente
+    </button>
+  </div>
+
+    <!-- Tabla de clientes -->
+    <div
+    class="table-container"
+    style="max-height: 300px; overflow-y: auto; border: 1px solid #333333; padding: 5px;"
+    >
+    <table class="table-custom table-striped table-custom">
+      <thead>
+        <tr style="position:sticky; top: 0;">
+          <th class="text-cyber">#</th>
+          <th class="text-cyber">Nombre</th>
+          <th class="text-cyber">Correo Electrónico</th>
+          <th class="text-cyber">Teléfono</th>
+          <th class="text-cyber">Fecha de Registro</th>
+          <th class="text-cyber">Autos comprados</th>
+          <th class="text-cyber">Total Comprado</th>
+          <th class="text-cyber">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (client of filteredClients; track client) {
+          <tr (click)="viewClientPurchases(client)" style="cursor: pointer;"
+              data-bs-toggle="modal"
+              data-bs-target="#clientPurchasesModal">
+            <td>{{ client.id }}</td>
+            <td>{{ client.fullName }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.phoneNumber }}</td>
+            <td>{{ client.registrationDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ client.carsPurchased }}</td>
+            <td class="text-cyber-green">{{ client.totalSpent | currency: 'MXN':'symbol':'1.0-0' }}</td>
+            <td>
+              <button
+                class="btn btn-edit btn-sm mb-2 mx-2"
+                data-bs-toggle="modal"
+                data-bs-target="#editClientModal"
+                (click)="editClient(client)">
+                  Editar
+              </button>
+              <button class="btn btn-delete btn-sm" (click)="deleteClient(client)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    </div>
+  
+    <!-- Modal para agregar cliente-->
+    <div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="addClientModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content mcontent-custom">
+          <form #addClientForm="ngForm" (ngSubmit)="addClient(addClientForm)">
+            <div class="modal-header-custom">
+              <h5 class="modal-title-custom" id="addClientModalLabel">Agregar Cliente</h5>
+              
+            </div>
+            <div class="modal-body-custom">
+              <div class="mb-3">
+                <label for="clientName" class="form-label">Nombre Completo</label>
+                <input
+                  type="text"
+                  id="clientName"
+                  name="fullName"
+                  class="form-control"
+                  autocomplete="off"
+                  [(ngModel)]="newClient.fullName"
+                  #clientName="ngModel"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="clientEmail" class="form-label">Correo Electrónico</label>
+                <input
+                  type="email"
+                  id="clientEmail"
+                  name="email"
+                  class="form-control"
+                  autocomplete="off"
+                  [(ngModel)]="newClient.email"
+                  #clientEmail="ngModel"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="clientPhone" class="form-label">Teléfono</label>
+                <input
+                  type="text"
+                  id="clientPhone"
+                  name="phone"
+                  class="form-control"
+                  autocomplete="off"
+                  [(ngModel)]="newClient.phone"
+                  #clientPhone="ngModel"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer-custom">
+              <button type="button" class="btn btn-edit" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-delete" [disabled]="addClientForm.invalid">Guardar Cliente</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Editar Cliente -->
+<div class="modal fade" id="editClientModal" tabindex="-1" aria-labelledby="editClientModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content mcontent-custom">
+      <form #editClientForm="ngForm" (ngSubmit)="updateClient(editClientForm)">
+        <div class="modal-header-custom">
+          <h5 class="modal-title-custom" id="editClientModalLabel">Editar Cliente</h5>
+          
+        </div>
+        <div class="modal-body-custom">
+          <div class="mb-3">
+            <label for="editFullName" class="form-label">Nombre Completo</label>
+            <input
+              type="text"
+              id="editFullName"
+              name="fullName"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="clientToEdit.fullName"
+              #editFullName="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editEmail" class="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              id="editEmail"
+              name="email"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="clientToEdit.email"
+              #editEmail="ngModel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="editPhoneNumber" class="form-label">Teléfono</label>
+            <input
+              type="text"
+              id="editPhoneNumber"
+              name="phoneNumber"
+              class="form-control"
+              autocomplete="off"
+              [(ngModel)]="clientToEdit.phoneNumber"
+              #editPhoneNumber="ngModel"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer-custom">
+          <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cerrar</button>
+          <button
+            type="submit"
+            class="btn btn-edit"
+            [disabled]="editClientForm.invalid"
+          >
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Ver Compras -->
+<div class="modal fade" id="clientPurchasesModal" tabindex="-1" aria-labelledby="clientPurchasesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content mcontent-custom">
+      <div class="modal-header-custom">
+        <h5 class="modal-title-custom" id="clientPurchasesModalLabel">
+          Historial de Compras: {{ selectedClient?.fullName }}
+        </h5>
+        
+      </div>
+      <div class="modal-body-custom">
+        <!-- Contenedor con scroll -->
+        <div class="table-container" style="max-height: 300px; overflow-y: auto; border: 1px solid #393939; padding: 5px;">
+          @if(clientPurchases.length > 0) {
+            <table class="table-custom table-striped">
+              <thead>
+                <tr style="position:sticky; top: 0;">
+                  <th class="text-cyber">#</th>
+                  <th class="text-cyber">Fecha</th>
+                  <th class="text-cyber">Marca</th>
+                  <th class="text-cyber">Auto</th>
+                  <th class="text-cyber">Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(purchase of clientPurchases; track purchase) {
+                  <tr>
+                    <td>{{ clientPurchases.indexOf(purchase) + 1 }}</td>
+                    <td>{{ purchase.sale_date }}</td>
+                    <td>{{ purchase.car_brand }}</td>
+                    <td>{{ purchase.car_name }}</td>
+                    <td class="text-cyber-green">{{ purchase.total_price | currency: 'MXN' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          } @else {
+            <p class="text-cyber">Este cliente no tiene compras registradas.</p>
+          }
+        </div>
+      </div>
+      <div class="modal-footer-custom">
+        <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Estadísticas de clientes -->
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card card-custom text-white text-center">
+          <div class="card-body">
+            <h5 class="card-title">Clientes Totales</h5>
+            <p class="card-text text-glow-blue">{{ totalClients }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-custom text-white text-center">
+          <div class="card-body">
+            <h5 class="card-title">Mejor Cliente</h5>
+            <p class="card-text text-glow-blue">{{ vipClientName || 'No disponible' }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="card card-custom text-white text-center">
+          <div class="card-body">
+            <h5 class="card-title">Último Cliente</h5>
+            <p class="card-text text-glow-blue">{{ lastRegistrationDate | date: 'dd/MM/yyyy' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

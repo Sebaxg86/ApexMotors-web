@@ -1,0 +1,171 @@
+<div class="container mt-5">
+  <!-- Título -->
+  <h1 class="mb-4 text-glow-pink" style="font-family: Orbitron;">
+    <i class="bi bi-currency-dollar me-2"></i>
+    Ventas Realizadas</h1>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <!-- Combobox para seleccionar el filtro -->
+    <div class="form-group">
+      <label for="filterBy" class="form-label2 text-cyber">Filtrar por:</label>
+      <select
+        id="filterBy"
+        class="form-select2 mx-3"
+        [(ngModel)]="selectedFilter"
+      >
+        <option value="SALE_ID">ID</option>
+        <option value="CLIENT_NAME">Cliente</option>
+        <option value="CAR_NAME">Auto</option>
+        
+      </select>
+    </div>
+  
+    <!-- Input para escribir el filtro -->
+    <div class="form-group">
+      <label for="filterValue" class="form-label2 mx-3 text-cyber">Buscar</label>
+      <input
+        id="filterValue"
+        type="text"
+        class="form-control2"
+        autocomplete="off"
+        [(ngModel)]="filterValue"
+        (input)="applyFilter()"
+        placeholder="Escribe para buscar"
+      />
+    </div>
+  </div>
+
+
+  <!-- Tabla de ventas -->
+  <div class="table-container"
+       style="max-height: 300px; overflow-y: auto; border: 1px solid #333333; padding: 5px;">
+    <table class="table-custom table-striped table-custom">
+      <thead>
+        <tr style="position:sticky; top: 0;">
+          <th class="text-cyber">#</th>
+          <th class="text-cyber">Cliente</th>
+          <th class="text-cyber">Auto</th>
+          <th class="text-cyber">Precio</th>
+          <th class="text-cyber">Fecha</th>
+          <th class="text-cyber">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sale of filteredSales; let i = index">
+          <th>{{ sale.SALE_ID }}</th>
+          <td>{{ sale.CLIENT_NAME }}</td>
+          <td>{{ sale.CAR_NAME }}</td>
+          <td class="text-cyber-green">{{ sale.TOTAL_PRICE | currency: 'MXN' }}</td>
+          <td>{{ sale.SALE_DATE }}</td>
+          <td>
+            <button
+              class="btn btn-delete btn-sm"
+              (click)="deleteSale(sale.SALE_ID)"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="sales.length === 0">
+          <td colspan="6" class="text-center">No hay ventas registradas</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Botón para agregar una nueva venta -->
+  <div class="d-flex justify-content-center mt-4">
+    <button
+      class="btn btn-add"
+      data-bs-toggle="modal"
+      data-bs-target="#addSaleModal"
+    >
+    <i class="bi bi-cart-plus-fill me-2"></i>
+      Agregar Venta
+    </button>
+  </div>
+
+  <!-- Modal para registrar nueva venta -->
+  <div
+    class="modal fade"
+    id="addSaleModal"
+    tabindex="-1"
+    aria-labelledby="addSaleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content mcontent-custom">
+        <div class="modal-header-custom">
+          <h5 class="modal-title-custom" id="addSaleModalLabel">Registrar Nueva Venta</h5>
+          
+        </div>
+        <div class="modal-body-custom">
+          <div class="mb-3">
+            <label for="clientSelect" class="form-label">Cliente</label>
+            <select
+              class="form-select"
+              id="clientSelect"
+              [(ngModel)]="selectedClientId"
+            >
+              <option *ngFor="let client of clients" [value]="client.ID">
+                {{client.ID}} - {{ client.FULL_NAME }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="carSelect" class="form-label">Auto</label>
+            <select
+              class="form-select"
+              id="carSelect"
+              [(ngModel)]="selectedCarId"
+            >
+              <option *ngFor="let car of cars" [value]="car.ID">
+                {{car.ID}} - {{ car.BRAND }} {{ car.MODEL }} (Stock: {{ car.STOCK }})
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer-custom">
+          <button
+            type="button"
+            class="btn btn-delete"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-edit" (click)="addSale()">
+            Confirmar Venta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <div class="card card-custom text-white text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total de Ventas</h5>
+          <p class="card-text text-glow-blue" style="font-size: 2rem;">{{ totalSales }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-custom text-white text-center">
+        <div class="card-body">
+          <h5 class="card-title">Ingresos Totales</h5>
+          <p class="card-text text-cyber-green" style="font-size: 2rem;">{{ totalIncome | currency: 'MXN' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-custom text-white text-center">
+        <div class="card-body">
+          <h5 class="card-title">Última Venta</h5>
+          <p class="card-text text-glow-blue" style="font-size: 2rem;">{{ lastSaleDate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+/* Cyberpunk Navbar */
+.cyberpunk-navbar {
+    background: linear-gradient(90deg, #3B0855, #852467);
+    border-bottom: 2px solid #FD8083;
+    font-family: 'Orbitron', sans-serif;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px #FD8083, 0 0 20px #EE227D;
+}
+
+.cyberpunk-navbar .navbar-brand {
+    color: #FD8083;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px #FD8083, 0 0 10px #EE227D;
+    transition: all 0.3s ease-in-out;
+}
+
+.cyberpunk-navbar .navbar-brand:hover {
+    color: #30C0B7;
+    text-shadow: 0 0 10px #30C0B7, 0 0 20px #498099;
+}
+
+.cyberpunk-navbar .nav-link {
+    color: #30C0B7;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+    text-shadow: 0 0 5px #30C0B7, 0 0 10px #498099;
+}
+
+.cyberpunk-navbar .nav-link.active,
+.cyberpunk-navbar .nav-link:hover {
+    color: #EE227D;
+    text-shadow: 0 0 10px #EE227D, 0 0 20px #FD8083;
+    transform: scale(1.1);
+}
+
+.cyberpunk-navbar .dropdown-menu {
+    background-color: #3B0855;
+    border: 1px solid #FD8083;
+    box-shadow: 0 0 10px #FD8083, 0 0 20px #EE227D;
+}
+
+.cyberpunk-navbar .dropdown-item {
+    color: #30C0B7;
+    transition: all 0.3s ease-in-out;
+}
+
+.cyberpunk-navbar .dropdown-item:hover {
+    background-color: #FD8083;
+    color: #3B0855;
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+    border-color: #FD8083;
+    box-shadow: 0 0 10px #FD8083;
+}
+
+.navbar-toggler-icon {
+    background-image: linear-gradient(#FD8083, #852467);
+}
+
